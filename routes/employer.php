@@ -8,6 +8,7 @@ use App\Http\Controllers\Employer\Auth\NewPasswordController;
 use App\Http\Controllers\Employer\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Employer\Auth\RegisteredUserController;
 use App\Http\Controllers\Employer\Auth\VerifyEmailController;
+use App\Http\Controllers\Employer\CompanyController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -58,4 +59,7 @@ Route::prefix('employer')->middleware('auth:employer')->group(function () {
     Route::get('dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('employer.dashboard');
+
+    Route::get('company', [CompanyController::class, 'index'])->name('employer.company');
+    Route::post('store', [CompanyController::class, 'store'])->name('employer.company.store');
 });
