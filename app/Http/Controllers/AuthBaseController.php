@@ -26,7 +26,6 @@ class AuthBaseController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
-        dd($this->guard, $this->redirectTo);
         if (Auth::guard($this->guard)->attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->intended($this->redirectTo);
