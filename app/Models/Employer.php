@@ -46,4 +46,9 @@ class Employer extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function getRoleAttribute()
+    {
+        return $this->getRoleNames()->first(); // Returns a single role like 'employer'
+    }
 }

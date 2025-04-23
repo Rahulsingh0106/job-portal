@@ -28,6 +28,15 @@ defineProps<Props>();
         </DropdownMenuItem>
     </DropdownMenuGroup>
     <DropdownMenuSeparator />
+    <DropdownMenuGroup v-if="user.role === 'Employer'">
+        <DropdownMenuItem :as-child="true">
+            <Link class="block w-full" :href="route('employer.company')" as="button">
+                <Settings class="mr-2 h-4 w-4" />
+                Company Profile
+            </Link>
+        </DropdownMenuItem>
+    </DropdownMenuGroup>
+    <DropdownMenuSeparator />
     <DropdownMenuItem :as-child="true">
         <Link class="block w-full" method="post" :href="route('logout')" as="button">
             <LogOut class="mr-2 h-4 w-4" />

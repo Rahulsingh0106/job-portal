@@ -28,7 +28,10 @@ class AuthBaseController extends Controller
         $credentials = $request->only('email', 'password');
         if (Auth::guard($this->guard)->attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended($this->redirectTo);
+
+            $request->session()->put('role', Auth::guard($this->guard)->user()->role);
+
+            return redirect()->route($this->redirectTo);
         }
 
         return back()->withErrors(['email' => 'Invalid credentials']);
@@ -60,7 +63,7 @@ class AuthBaseController extends Controller
         Auth::guard($this->guard)->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/login');
+        return redirect('employer/login');
     }
 
     public function confirmablePassword(Request $request): RedirectResponse
