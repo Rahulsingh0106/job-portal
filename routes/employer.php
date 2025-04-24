@@ -9,6 +9,7 @@ use App\Http\Controllers\Employer\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Employer\Auth\RegisteredUserController;
 use App\Http\Controllers\Employer\Auth\VerifyEmailController;
 use App\Http\Controllers\Employer\CompanyController;
+use App\Http\Controllers\Employer\JobPostController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -62,4 +63,6 @@ Route::prefix('employer')->middleware('auth:employer')->group(function () {
 
     Route::get('company', [CompanyController::class, 'index'])->name('employer.company');
     Route::post('store', [CompanyController::class, 'store'])->name('employer.company.store');
+
+    Route::resource('job-posts', JobPostController::class);
 });

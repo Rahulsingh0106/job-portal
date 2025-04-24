@@ -17,7 +17,7 @@ use Inertia\Response;
 class AuthenticatedSessionController extends AuthBaseController
 {
     protected string $guard = 'admin';
-    protected string $redirectTo = 'admin/dashboard';
+    protected string $redirectTo = 'admin.dashboard';
     /**
      * Show the login page.
      */

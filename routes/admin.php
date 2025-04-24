@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Admin\Auth\RegisteredAdminController;
+use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -14,9 +15,7 @@ Route::prefix('admin')->middleware('guest:admin')->group(function () {
 });
 
 Route::prefix('admin')->middleware('auth:admin')->group(function () {
-    Route::get('dashboard', function () {
-        return Inertia::render('admin/Dashboard');
-    })->name('admin.dashboard');
-    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
-        ->name('admin.logout');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('admin.logout');
+    Route::post('job-post-status/{id}', [DashboardController::class, 'updateJobPostStatus'])->name('admin.job-post.status');
 });

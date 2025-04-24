@@ -7,14 +7,61 @@ import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
 import { BookOpen, Folder, LayoutGrid } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
+import type { User } from '@/types';
 
-const mainNavItems: NavItem[] = [
-    {
-        title: 'Dashboard',
-        href: '/dashboard',
-        icon: LayoutGrid,
-    },
-];
+interface Props {
+    role: String;
+}
+
+const props = defineProps<Props>();
+const mainNavItems: NavItem[] = [];
+console.log(props.role)
+if(props.role){
+switch (props.role) {
+    case 'Admin':
+        mainNavItems.push(
+            {
+                title: 'Dashboard',
+                href: '/admin/dashboard',
+                icon: LayoutGrid,
+            }
+        );
+        break;
+
+    case 'Employer':
+        mainNavItems.push(
+            {
+                title: 'Dashboard',
+                href: '/employer/dashboard',
+                icon: LayoutGrid,
+            },
+            {
+                title: 'Job Posts',
+                href: '/employer/job-posts',
+                icon: Folder,
+            }
+        );
+        break;
+
+    case 'User':
+        mainNavItems.push(
+            {
+                title: 'Dashboard',
+                href: '/dashboard',
+                icon: LayoutGrid,
+            }
+        );
+        break;
+
+    default:
+        mainNavItems.push({
+            title: 'Dashboard',
+            href: '/dashboard',
+            icon: LayoutGrid,
+        });
+        break;
+}
+}
 
 const footerNavItems: NavItem[] = [
     {

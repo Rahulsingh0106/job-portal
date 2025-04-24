@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\UserDashboardController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest:web')->group(function () {
@@ -53,4 +54,6 @@ Route::middleware('auth:web')->group(function () {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'logout'])
         ->name('logout');
+
+    Route::get('dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
 });
