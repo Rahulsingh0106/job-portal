@@ -51,4 +51,20 @@ class Employer extends Authenticatable
     {
         return $this->getRoleNames()->first(); // Returns a single role like 'employer'
     }
+
+    /**
+     * Get the job posts for the employer.
+     */
+    public function jobPosts()
+    {
+        return $this->hasMany(JobPost::class);
+    }
+
+    /**
+     * Get the company associated with the employer.
+     */
+    public function company()
+    {
+        return $this->hasOne(Company::class);
+    }
 }
