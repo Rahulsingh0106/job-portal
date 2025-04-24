@@ -2,7 +2,7 @@
 import AppLayout from '@/layouts/AppLayout.vue';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/vue3';
-import type { Jobs } from '@/types'; // Create this interface if needed
+import type { Jobs, Resume } from '@/types'; // Create this interface if needed
 import { router } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
@@ -14,6 +14,7 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 interface PageProps {
   jobs: Jobs[];
+  resume: Resume;
 }
 const props = defineProps<PageProps>();
 const showModal = ref(false);
@@ -22,7 +23,10 @@ const resume = ref<File | null>(null);
 
 function apply(jobId: number) {
   selectedJobId.value = jobId;
-  showModal.value = true;
+  showModal.value = !props.resume ? true : false;
+  if(!showModal.value){
+    router.post(`/apply/${jobId}`);
+  }
 }
 
 function closeModal() {
@@ -30,15 +34,20 @@ function closeModal() {
   selectedJobId.value = null;
   resume.value = null;
 }
-
+function handleFileChange(event: Event) {
+  const target = event.target as HTMLInputElement;
+  if (target && target.files && target.files.length > 0) {
+    resume.value = target.files[0];
+  }
+}
 function submitResume() {
   if (!resume.value || !selectedJobId.value) return;
 
   const formData = new FormData();
   formData.append('resume', resume.value);
-  formData.append('job_id', selectedJobId.value.toString());
+  // formData.append('job_id', selectedJobId.value);
 
-  router.post('/apply-job', formData, {
+  router.post(`/apply/${selectedJobId.value}`, formData, {
     onSuccess: () => {
       closeModal();
     },
@@ -93,7 +102,7 @@ function submitResume() {
     <input
       type="file"
       accept=".pdf,.doc,.docx"
-      @change="e => resume.value = e.target.files[0]"
+      @change="handleFileChange"
       class="mb-4"
     />
     <div class="flex justify-end space-x-3">

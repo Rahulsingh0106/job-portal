@@ -56,4 +56,5 @@ Route::middleware('auth:web')->group(function () {
         ->name('logout');
 
     Route::get('dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
+    Route::post('apply/{id}', [UserDashboardController::class, 'apply'])->name('apply');
 });
