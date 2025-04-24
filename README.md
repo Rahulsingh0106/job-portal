@@ -30,3 +30,10 @@ Ensure you have the following installed:
 
 7. **Seed database**
     php artisan db:seed
+
+8. **Run server**
+    composer run dev
+
+ -- User Login: http://127.0.0.1:8000/login
+ -- Employer Login: http://127.0.0.1:8000/employer/login
+ -- Admin Login: http://127.0.0.1:8000/admin/login

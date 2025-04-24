@@ -18,13 +18,14 @@ class RegisteredUserController extends AuthBaseController
 {
     protected string $guard = 'web';
     protected string $redirectTo = 'dashboard';
-    protected string $model = 'User';
+    protected string $model = User::class;
+    protected string $role = 'User';
 
     public function create(): Response
     {
         return Inertia::render('auth/Register', [
-            'submitUrl' => 'employer.register',
-            'redirectUrl' => 'employer.login'
+            'submitUrl' => 'register',
+            'redirectUrl' => 'login'
         ]);
     }
 }

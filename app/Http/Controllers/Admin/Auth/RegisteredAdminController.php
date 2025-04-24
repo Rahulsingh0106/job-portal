@@ -19,7 +19,9 @@ class RegisteredAdminController extends AuthBaseController
 {
     protected string $guard = 'admin';
     protected string $redirectTo = 'admin/dashboard';
-    protected string $model = 'Admin';
+    protected string $model = Admin::class;
+    protected string $role = 'Admin';
+
     /**
      * Show the registration page.
      */
