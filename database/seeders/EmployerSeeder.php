@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Employer;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -20,7 +21,7 @@ class EmployerSeeder extends Seeder
             'guard_name' => 'employer'
         ]);
 
-        $admin1 = User::create([
+        $admin1 = Employer::create([
             'name' => 'John employer',
             'email' => 'john.employer@gmail.com',
             'email_verified_at' => now(),
@@ -28,7 +29,7 @@ class EmployerSeeder extends Seeder
         ]);
         $admin1->assignRole($adminRole);
 
-        $admin2 = User::create([
+        $admin2 = Employer::create([
             'name' => 'Jane Smith Employer',
             'email' => 'jane.smith.employer@gmail.com',
             'email_verified_at' => now(),
